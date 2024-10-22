@@ -1,0 +1,4 @@
+Sud = Tristan
+Ouest = Alexandre
+Nord = Thibault
+Est = Killian
