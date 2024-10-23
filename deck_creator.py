@@ -10,4 +10,3 @@ def deck_creator(players: list[Player], pack: list[Card]) -> list[Player]:
         for j in range(2):
             player.deck.append(pack.pop())
     return players
-

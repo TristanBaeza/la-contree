@@ -1,5 +1,6 @@
 import pygame
 from dataclasses import dataclass
+
 pygame.init()
 
 
@@ -18,8 +19,15 @@ screen = pygame.display.set_mode((1080, 691))
 
 background = pygame.image.load("assets/tapis_contree_modifie.jpg")
 
-player_image = pygame.image.load("assets/cartes-gif/2c.jpg")
-player1 = Player(health=100, max_health=100, attack=10, velocity=10, image=player_image, rect=player_image.get_rect())
+player_image = pygame.image.load("assets/cartes-gif/3c.gif")
+player1 = Player(
+    health=100,
+    max_health=100,
+    attack=10,
+    velocity=10,
+    image=player_image,
+    rect=player_image.get_rect(),
+)
 
 running = True
 
