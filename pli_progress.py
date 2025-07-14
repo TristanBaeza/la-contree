@@ -1,15 +1,14 @@
-from .constants import ATOUT_VALUES, VALUES
+from .constants import ATOUT_VALUES, VALUES, ATOUT_VALUES_POINTS, VALUES_POINTS
 from objects import Player, Card
 from typing import Tuple, List, Union
 
 
 def pli(
     players: List[Player],
-    pack: Union[List, List[Card]],
     all_cards_pack: List[Card],
     player_turn: Player,
     atout: str,
-) -> Tuple[List[Player], List[Card], Player]:
+) -> Tuple[List[Player], List[Card], Player, int]:
     cards_played_during_pli = []
     first_input = input("première carte jouée")
     first_card = input_to_card(first_input, all_cards_pack)
@@ -17,6 +16,7 @@ def pli(
     cards_played_during_pli.append(first_card)
     best_card = first_card
     winner = player_turn
+    points_during_pli = 0
     for i in range(1, 4):
         real_index = (index_first_player + i) % 4
         card_played = card_to_play(
@@ -24,11 +24,16 @@ def pli(
         )
         cards_played_during_pli.append(card_played)
         players[real_index].deck.remove(card_played)
+        points_during_pli = counting_points(card_played, atout, points_during_pli)
         winner, best_card = determine_best_card(
             best_card, atout, card_played, players, real_index, winner
         )
-    pack += cards_played_during_pli
-    return players, pack, winner
+    return (
+        players,
+        cards_played_during_pli,
+        winner,
+        points_during_pli,
+    )
 
 
 def input_to_card(player_input: str, all_cards_pack: List[Card]) -> Card:
@@ -113,3 +118,11 @@ def determine_best_card(
                 best_card = card_played
                 winner = players[index]
     return winner, best_card
+
+
+def counting_points(card_played: Card, atout: str, points_during_pli: int) -> int:
+    if card_played.color == atout:
+        points_during_pli += ATOUT_VALUES_POINTS[ATOUT_VALUES.index(card_played.value)]
+    else:
+        points_during_pli += VALUES_POINTS[ATOUT_VALUES.index(card_played.value)]
+    return points_during_pli

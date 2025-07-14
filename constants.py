@@ -1,3 +1,5 @@
 COLORS = ["s", "c", "h", "d"]
 VALUES = ["7", "8", "9", "J", "Q", "K", "10", "A"]
+VALUES_POINTS = [0, 0, 0, 2, 3, 4, 10, 11]
 ATOUT_VALUES = ["7", "8", "Q", "K", "10", "A", "9", "J"]
+ATOUT_VALUES_POINTS = [0, 0, 3, 4, 10, 11, 14, 20]
